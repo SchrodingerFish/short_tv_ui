@@ -1,0 +1,86 @@
+.player-page {
+  padding: 24px 0;
+  min-height: calc(100vh - 200px);
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 24px;
+}
+
+.back-btn:hover {
+  background: var(--card);
+  border-color: var(--primary);
+}
+
+.drama-info {
+  display: flex;
+  gap: 24px;
+  margin: 32px 0;
+  padding: 24px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.drama-cover {
+  width: 180px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.drama-details {
+  flex: 1;
+}
+
+.drama-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.drama-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .player-page {
+    padding: 16px 0;
+  }
+
+  .drama-info {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .drama-cover {
+    width: 120px;
+    height: 160px;
+  }
+
+  .drama-title {
+    font-size: 22px;
+  }
+
+  .drama-desc {
+    font-size: 14px;
+  }
+}
