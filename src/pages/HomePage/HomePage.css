@@ -56,20 +56,38 @@
 @media (max-width: 1200px) {
   .poster-grid {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
   }
 }
 
 @media (max-width: 768px) {
   .home-page {
-    padding: 24px 0;
+    padding: 20px 0;
   }
 
   .poster-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
   }
 
   .pagination {
-    gap: 16px;
+    gap: 12px;
+    padding: 20px 0;
+  }
+
+  .page-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .page-info {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .poster-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 }

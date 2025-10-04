@@ -244,22 +244,54 @@
 
 @media (max-width: 768px) {
   .downloads-page {
-    padding: 16px 0;
+    padding: 20px 0;
   }
 
   .downloads-header {
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     padding-bottom: 16px;
+    gap: 12px;
   }
 
   .downloads-title {
-    font-size: 24px;
+    font-size: 22px;
+    gap: 10px;
+  }
+
+  .downloads-count {
+    font-size: 14px;
+  }
+
+  .clear-btn {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
+  .empty-state {
+    padding: 60px 20px;
+  }
+
+  .empty-title {
+    font-size: 20px;
+  }
+
+  .empty-desc {
+    font-size: 14px;
+  }
+
+  .downloads-list {
+    gap: 20px;
   }
 
   .download-group {
     padding: 16px;
+  }
+
+  .group-header {
+    gap: 12px;
+    margin-bottom: 16px;
   }
 
   .group-cover {
@@ -271,7 +303,50 @@
     font-size: 16px;
   }
 
+  .group-count {
+    font-size: 13px;
+  }
+
   .download-item {
     padding: 12px;
+    gap: 10px;
+  }
+
+  .episode-label {
+    font-size: 14px;
+  }
+
+  .download-status {
+    font-size: 12px;
+  }
+
+  .download-file-btn,
+  .remove-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .downloads-title {
+    font-size: 20px;
+  }
+
+  .download-group {
+    padding: 12px;
+  }
+
+  .group-cover {
+    width: 45px;
+    height: 60px;
+  }
+
+  .group-name {
+    font-size: 15px;
+  }
+
+  .empty-btn {
+    padding: 10px 24px;
+    font-size: 14px;
   }
 }

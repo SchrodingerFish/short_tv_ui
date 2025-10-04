@@ -83,26 +83,141 @@
 
 @media (max-width: 768px) {
   .player-page {
-    padding: 16px 0;
+    padding: 12px 0;
+  }
+
+  .player-header {
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .back-btn,
+  .download-btn {
+    padding: 8px 14px;
+    font-size: 13px;
   }
 
   .drama-info {
     flex-direction: column;
     padding: 16px;
     gap: 16px;
+    margin: 24px 0;
   }
 
   .drama-cover {
-    width: 120px;
-    height: 160px;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    aspect-ratio: 3/4;
+    align-self: center;
   }
 
   .drama-title {
-    font-size: 22px;
+    font-size: 20px;
+    margin-bottom: 12px;
   }
 
   .drama-desc {
     font-size: 14px;
+  }
+
+  .finish-tip-content {
+    padding: 32px 24px;
+  }
+
+  .finish-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .finish-tip-content h2 {
+    font-size: 20px;
+  }
+
+  .finish-tip-content p {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .finish-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .finish-btn {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .download-modal-content {
+    max-height: 85vh;
+  }
+
+  .download-modal-header {
+    padding: 20px;
+  }
+
+  .download-modal-header h2 {
+    font-size: 18px;
+  }
+
+  .download-modal-actions {
+    padding: 12px 20px;
+  }
+
+  .episode-select-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .episode-select-item {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .download-modal-footer {
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .cancel-btn,
+  .confirm-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .drama-info {
+    padding: 12px;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .drama-cover {
+    max-width: 160px;
+  }
+
+  .drama-title {
+    font-size: 18px;
+  }
+
+  .drama-desc {
+    font-size: 13px;
+  }
+
+  .episode-select-grid {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 8px;
+    padding: 16px;
+  }
+
+  .finish-tip-content {
+    padding: 28px 20px;
   }
 }
 

@@ -127,15 +127,53 @@
 }
 
 @media (max-width: 768px) {
+  .poster-card:hover {
+    transform: none;
+  }
+
+  .favorite-btn {
+    opacity: 1;
+    width: 32px;
+    height: 32px;
+    top: 6px;
+    right: 6px;
+  }
+
+  .poster-card:hover .poster-image {
+    transform: scale(1);
+  }
+
   .poster-info {
-    padding: 12px;
+    padding: 10px;
   }
 
   .poster-title {
-    font-size: 14px;
+    font-size: 13px;
+    margin-bottom: 6px;
   }
 
   .poster-meta {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .poster-info {
+    padding: 8px;
+  }
+
+  .poster-title {
     font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .poster-meta {
+    font-size: 10px;
+  }
+
+  .favorite-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
   }
 }

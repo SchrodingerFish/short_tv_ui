@@ -58,13 +58,41 @@
 }
 
 @media (max-width: 768px) {
+  .episode-list {
+    margin-top: 24px;
+  }
+
+  .episode-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
   .episode-grid {
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 8px;
   }
 
   .episode-btn {
-    padding: 10px 6px;
+    padding: 10px 4px;
     font-size: 13px;
+  }
+
+  .episode-btn.cached::after {
+    top: 4px;
+    right: 4px;
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .episode-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  .episode-btn {
+    padding: 8px 4px;
+    font-size: 12px;
   }
 }

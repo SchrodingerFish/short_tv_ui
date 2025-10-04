@@ -31,6 +31,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 #root {
@@ -106,8 +108,35 @@ body {
   padding: 0 24px;
 }
 
+/* Mobile touch optimization */
+button,
+a,
+.poster-card,
+.episode-btn,
+.category-item {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 0 16px;
+  }
+
+  /* Optimize button touch areas for mobile */
+  button {
+    min-height: 44px;
+  }
+
+  /* Improve scroll performance */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
   }
 }
