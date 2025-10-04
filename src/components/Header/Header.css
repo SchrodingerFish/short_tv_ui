@@ -2,6 +2,7 @@
   background: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -69,9 +70,13 @@
 
 .search-btn {
   position: absolute;
-  right: 8px;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 36px;
   height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,12 +85,23 @@
   border-radius: 50%;
   color: #000;
   cursor: pointer;
-  transition: var(--transition);
+  transition: background 0.3s, transform 0.3s;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.search-btn svg {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  flex-shrink: 0;
+  display: block;
 }
 
 .search-btn:hover {
   background: var(--primary-light);
-  transform: scale(1.05);
+  transform: translateY(-50%) scale(1.05);
 }
 
 .favorites-link {
@@ -231,6 +247,8 @@
 @media (max-width: 768px) {
   .header {
     padding: 12px 0;
+    position: -webkit-sticky;
+    position: sticky;
   }
 
   .header-content {
@@ -260,12 +278,26 @@
   .search-input {
     padding: 10px 44px 10px 16px;
     font-size: 14px;
+    height: 40px;
   }
 
   .search-btn {
+    right: 4px;
     width: 32px;
     height: 32px;
-    font-size: 14px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+  .search-btn svg {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+  }
+
+  .search-btn:hover {
+    transform: translateY(-50%) scale(1.05);
   }
 
   .favorites-link,

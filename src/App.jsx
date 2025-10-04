@@ -96,7 +96,22 @@ const Layout = ({ children }) => {
         color: 'var(--text-secondary)',
         fontSize: '14px'
       }}>
-        <p>© 2025 福利短剧. All rights reserved.</p>
+        <p>
+          <a
+            href="https://github.com/SchrodingerFish/short_tv_ui"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: 'var(--text-secondary)',
+              textDecoration: 'none',
+              transition: 'color 0.3s'
+            }}
+            onMouseEnter={(e) => e.target.style.color = 'var(--primary)'}
+            onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}
+          >
+              © 2025 福利短剧. All rights reserved.
+          </a>
+        </p>
       </footer>
     </div>
   );

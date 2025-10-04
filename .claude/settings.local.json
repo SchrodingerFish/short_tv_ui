@@ -6,7 +6,8 @@
       "Bash(git add:*)",
       "Bash(git reset:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\n添加收藏、下载、观看历史功能\n\n- 添加收藏列表页面 (FavoritesPage)\n- 添加下载管理页面 (DownloadsPage) \n- 添加观看历史页面 (HistoryPage)\n- 支持 localStorage 持久化存储\n- 支持播放进度记录和恢复\n- 优化播放页面从历史记录继续观看功能\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npm run dev:*)"
     ],
     "deny": [],
     "ask": []
