@@ -4,6 +4,9 @@ import Header from './components/Header/Header';
 import CategoryMenu from './components/CategoryMenu/CategoryMenu';
 import HomePage from './pages/HomePage/HomePage';
 import PlayerPage from './pages/PlayerPage/PlayerPage';
+import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
+import DownloadsPage from './pages/DownloadsPage/DownloadsPage';
+import HistoryPage from './pages/HistoryPage/HistoryPage';
 import { useAppStore } from './store/useAppStore';
 import { dramaAPI } from './services/api';
 import './styles/global.css';
@@ -105,6 +108,9 @@ const App = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/downloads" element={<DownloadsPage />} />
+          <Route path="/history" element={<HistoryPage />} />
           <Route path="/player/:dramaId" element={<PlayerPage />} />
         </Routes>
       </Layout>

@@ -20,6 +20,45 @@
   background: var(--bg-secondary);
 }
 
+.favorite-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: var(--transition);
+  z-index: 10;
+  opacity: 0;
+}
+
+.poster-card:hover .favorite-btn {
+  opacity: 1;
+}
+
+.favorite-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.favorite-btn.favorited {
+  opacity: 1;
+  background: rgba(255, 59, 48, 0.9);
+  color: white;
+}
+
+.favorite-btn.favorited:hover {
+  background: rgba(255, 59, 48, 1);
+}
+
 .poster-image {
   width: 100%;
   height: 100%;
