@@ -21,6 +21,8 @@ const PlayerPage = () => {
     addHistory,
     updateHistoryProgress,
     getHistoryByDrama,
+    isFavorite,
+    toggleFavorite,
   } = useAppStore();
 
   const [videoUrl, setVideoUrl] = React.useState('');
@@ -236,6 +238,20 @@ const PlayerPage = () => {
     alert(`已添加 ${selectedEpisodes.length} 集到下载列表`);
   };
 
+  const handleToggleFavorite = () => {
+    if (dramaInfo) {
+      toggleFavorite({
+        id: dramaId,
+        name: dramaInfo.title,
+        cover: dramaInfo.cover,
+        score: '8.5', // 播放页面可能没有评分，使用默认值
+        update_time: new Date().toLocaleDateString()
+      });
+    }
+  };
+
+  const favorited = isFavorite(dramaId);
+
   return (
     <div className="player-page">
       <div className="container">
@@ -253,18 +269,35 @@ const PlayerPage = () => {
             <span>返回</span>
           </button>
 
-          <button className="download-btn" onClick={handleShowDownloadModal}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span>批量下载</span>
-          </button>
+          <div className="player-actions">
+            <button
+              className={`favorite-btn-player ${favorited ? 'favorited' : ''}`}
+              onClick={handleToggleFavorite}
+              title={favorited ? '取消收藏' : '收藏'}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill={favorited ? 'currentColor' : 'none'}>
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  stroke={favorited ? 'none' : 'currentColor'}
+                  strokeWidth="2"
+                />
+              </svg>
+              <span>{favorited ? '已收藏' : '收藏'}</span>
+            </button>
+
+            <button className="download-btn" onClick={handleShowDownloadModal}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span>批量下载</span>
+            </button>
+          </div>
         </div>
 
         <VideoPlayer

@@ -11,8 +11,15 @@
   gap: 16px;
 }
 
+.player-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 .back-btn,
-.download-btn {
+.download-btn,
+.favorite-btn-player {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -28,9 +35,21 @@
 }
 
 .back-btn:hover,
-.download-btn:hover {
+.download-btn:hover,
+.favorite-btn-player:hover {
   background: var(--card);
   border-color: var(--primary);
+}
+
+.back-btn svg,
+.download-btn svg,
+.favorite-btn-player svg {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  flex-shrink: 0;
+  display: block;
 }
 
 .download-btn {
@@ -43,6 +62,16 @@
   background: var(--primary-light);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+}
+
+.favorite-btn-player.favorited {
+  background: rgba(255, 59, 48, 0.1);
+  border-color: #ff3b30;
+  color: #ff3b30;
+}
+
+.favorite-btn-player.favorited:hover {
+  background: rgba(255, 59, 48, 0.2);
 }
 
 .drama-info {
@@ -91,10 +120,28 @@
     flex-wrap: wrap;
   }
 
+  .player-actions {
+    gap: 8px;
+  }
+
   .back-btn,
-  .download-btn {
+  .download-btn,
+  .favorite-btn-player {
     padding: 8px 14px;
     font-size: 13px;
+  }
+
+  .back-btn svg,
+  .download-btn svg,
+  .favorite-btn-player svg {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    min-height: 18px;
+  }
+
+  .favorite-btn-player span {
+    display: none;
   }
 
   .drama-info {

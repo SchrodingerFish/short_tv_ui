@@ -62,9 +62,22 @@ const Layout = ({ children }) => {
     try {
       setLoading(true);
       const { data } = await dramaAPI.getRandomDrama();
+      console.log('随机推荐返回数据:', data);
+
+      // 尝试多种可能的数据结构
+      let dramaId = null;
       if (data.items?.length > 0) {
-        const drama = data.items[0];
-        navigate(`/player/${drama.vod_id}`);
+        dramaId = data.items[0].vod_id || data.items[0].id;
+      } else if (data.vod_id || data.id) {
+        dramaId = data.vod_id || data.id;
+      } else if (data.data?.vod_id || data.data?.id) {
+        dramaId = data.data.vod_id || data.data.id;
+      }
+
+      if (dramaId) {
+        navigate(`/player/${dramaId}`);
+      } else {
+        console.error('未找到有效的剧集ID');
       }
     } catch (error) {
       console.error('获取随机推荐失败:', error);
