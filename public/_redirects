@@ -1,0 +1,20 @@
+# Cloudflare Pages SPA 路由配置
+# 静态资源直接返回
+/assets/*  200
+/manifest.json  200
+/sw.js  200
+/favicon.ico  200
+/*.png  200
+/*.jpg  200
+/*.jpeg  200
+/*.gif  200
+/*.svg  200
+/*.webp  200
+/*.ico  200
+/*.woff  200
+/*.woff2  200
+/*.ttf  200
+/*.eot  200
+
+# 所有其他路由重定向到 index.html（SPA 客户端路由）
+/*  /index.html  200

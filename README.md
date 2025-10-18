@@ -72,6 +72,33 @@ npm run build
 npm run preview
 ```
 
+### 🌐 部署
+
+#### Cloudflare Pages 部署（推荐）
+
+本项目已配置支持 Cloudflare Pages，无需 nginx 或其他 Web 服务器：
+
+1. 连接 Git 仓库到 Cloudflare Pages
+2. 配置构建设置：
+   - **构建命令**: `npm run build`
+   - **构建输出目录**: `dist`
+   - **Node.js 版本**: `20`
+3. 自动部署
+
+详细说明请查看 [Cloudflare Pages 部署指南](./CLOUDFLARE_PAGES_DEPLOYMENT.md)
+
+#### Docker 部署
+
+使用提供的 Dockerfile 进行容器化部署：
+
+```bash
+# 构建镜像
+docker build -t short-tv-ui .
+
+# 运行容器
+docker run -p 3000:3000 short-tv-ui
+```
+
 ### 📱 响应式设计
 - 桌面端: 网格布局,悬停效果
 - 平板端: 自适应网格
