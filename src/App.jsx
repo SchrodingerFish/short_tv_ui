@@ -67,11 +67,11 @@ const Layout = ({ children }) => {
       // 尝试多种可能的数据结构
       let dramaId = null;
       if (data.items?.length > 0) {
-        dramaId = data.items[0].vod_id || data.items[0].id;
-      } else if (data.vod_id || data.id) {
-        dramaId = data.vod_id || data.id;
-      } else if (data.data?.vod_id || data.data?.id) {
-        dramaId = data.data.vod_id || data.data.id;
+        dramaId = data.items[0].id;
+      } else if (data.id) {
+        dramaId = data.id;
+      } else if (data.data?.id) {
+        dramaId = data.data.id;
       }
 
       if (dramaId) {
