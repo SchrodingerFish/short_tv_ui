@@ -9,12 +9,24 @@ export default defineConfig({
     open: true,
     cors: true,
     proxy: {
-      // 可选：如果需要代理视频请求
-      // '/video-proxy': {
-      //   target: 'https://dl-c-zb-u.drive.quark.cn',
-      //   changeOrigin: true,
-      //   rewrite: (path) => path.replace(/^\/video-proxy/, ''),
-      // }
+      // 代理API请求到第三方服务器，解决CORS问题
+      '/api': {
+        target: 'https://asteria.r2afosne.dpdns.org',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        configure: (proxy, options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('proxy error', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log('Sending Request:', req.method, req.url);
+          });
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            console.log('Received Response:', proxyRes.statusCode, req.url);
+          });
+        }
+      }
     }
   },
   build: {

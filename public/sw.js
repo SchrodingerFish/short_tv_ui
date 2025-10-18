@@ -44,12 +44,14 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
 
   // 视频文件缓存策略 - 跳过跨域视频请求，避免 CORS 问题
-  if (request.url.includes('.mp4') || request.url.includes('.m3u8')) {
-    // 如果是跨域请求，直接放行，不做缓存处理
+  if (request.url.includes('.mp4') || request.url.includes('.m3u8') || request.url.includes('.ts')) {
+    // 如果是跨域请求，直接放行，不做缓存处理，避免CORS问题
     if (!request.url.startsWith(self.location.origin)) {
-      return;
+      console.log('跳过跨域视频请求:', request.url);
+      return; // 直接返回，让浏览器处理
     }
 
+    // 对于同源视频，使用缓存策略
     event.respondWith(
       caches.open(VIDEO_CACHE_NAME).then(cache => {
         return cache.match(request).then(response => {
@@ -58,9 +60,10 @@ self.addEventListener('fetch', (event) => {
             return response;
           }
 
-          return fetch(request, { mode: 'no-cors' }).then(networkResponse => {
+          // 同源视频可以正常缓存
+          return fetch(request).then(networkResponse => {
             // 只缓存成功的响应
-            if (networkResponse && networkResponse.status === 200) {
+            if (networkResponse && networkResponse.ok) {
               cache.put(request, networkResponse.clone());
             }
             return networkResponse;
@@ -74,7 +77,23 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 其他资源使用网络优先策略
+  // API请求使用网络优先策略，不缓存API响应以确保数据实时性
+  if (request.url.includes('/vod/') || request.url.includes('/api/')) {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          // API请求不缓存，直接返回
+          return response;
+        })
+        .catch(error => {
+          console.error('API请求失败:', error);
+          throw error;
+        })
+    );
+    return;
+  }
+
+  // 其他静态资源使用网络优先策略
   event.respondWith(
     fetch(request)
       .then(response => {
@@ -82,7 +101,7 @@ self.addEventListener('fetch', (event) => {
         const responseToCache = response.clone();
 
         // 缓存成功的响应
-        if (response.status === 200) {
+        if (response.ok && request.method === 'GET') {
           caches.open(CACHE_NAME).then(cache => {
             cache.put(request, responseToCache);
           });

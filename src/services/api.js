@@ -1,15 +1,35 @@
 import axios from 'axios';
 
-const API_BASE = 'https://asteria.r2afosne.dpdns.org';
+// 开发环境使用代理，生产环境使用实际API地址
+const API_BASE = import.meta.env.DEV 
+  ? '/api' 
+  : 'https://asteria.r2afosne.dpdns.org';
 
 const api = axios.create({
   baseURL: API_BASE,
-  timeout: 15000, // 减少超时时间到15秒
+  timeout: 20000, // 增加超时时间到20秒，避免过早超时
+  headers: {
+    'Content-Type': 'application/json',
+  }
 });
 
-// 添加请求重试拦截器
+// 添加请求拦截器，记录请求信息
+api.interceptors.request.use(
+  (config) => {
+    console.log('发起API请求:', config.url);
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// 优化响应拦截器，减少不必要的重试
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log('API请求成功:', response.config.url);
+    return response;
+  },
   async (error) => {
     const config = error.config;
 
@@ -18,17 +38,21 @@ api.interceptors.response.use(
       config.__retryCount = 0;
     }
 
-    // 最多重试2次
-    if (config.__retryCount < 2) {
+    // 只对网络错误或超时错误重试，不对4xx/5xx错误重试
+    const shouldRetry = !error.response || error.code === 'ECONNABORTED' || error.code === 'ERR_NETWORK';
+    
+    // 最多重试1次（减少重试次数，避免过度重试）
+    if (shouldRetry && config.__retryCount < 1) {
       config.__retryCount += 1;
-      console.log(`请求失败，正在重试 ${config.__retryCount}/2...`);
+      console.log(`网络请求失败，正在重试 ${config.__retryCount}/1...`);
 
-      // 等待1秒后重试
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // 等待1.5秒后重试
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
       return api(config);
     }
 
+    console.error('API请求失败:', error.response?.data || error.message);
     return Promise.reject(error);
   }
 );

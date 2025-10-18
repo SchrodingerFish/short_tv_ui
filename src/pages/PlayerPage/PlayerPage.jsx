@@ -38,24 +38,40 @@ const PlayerPage = () => {
       setIsLoading(true);
       setVideoUrl(''); // 先清空URL避免显示旧视频
 
+      console.log(`正在加载第 ${episodeIndex + 1} 集...`);
+      
       // API 参数从 1 开始，而不是 0
       const { data } = await dramaAPI.parseEpisode(dramaId, episodeIndex + 1);
 
       if (data.episode?.parsedUrl) {
-        setVideoUrl(data.episode.parsedUrl);
+        console.log(`第 ${episodeIndex + 1} 集加载成功`);
+        
+        // 更新剧集信息
         setDramaInfo({
           title: data.videoName,
           description: data.description,
           cover: data.cover,
           totalEpisodes: data.totalEpisodes || 20,
         });
+        
+        // 设置视频URL
+        setVideoUrl(data.episode.parsedUrl);
       } else {
+        console.error('API响应中没有视频地址:', data);
         throw new Error('未获取到视频地址');
       }
     } catch (error) {
       console.error('加载剧集失败:', error);
-      const errorMsg = error.response?.data?.message || error.message || '未知错误';
-      alert(`加载失败: ${errorMsg}\n请尝试切换其他剧集或稍后重试`);
+      
+      // 提供更友好的错误提示
+      const errorMsg = error.response?.status === 404 
+        ? '该集不存在或已下架' 
+        : error.response?.data?.message || error.message || '网络连接失败';
+      
+      alert(`加载第 ${episodeIndex + 1} 集失败: ${errorMsg}\n请尝试切换其他剧集或稍后重试`);
+      
+      // 加载失败时，保持当前集数不变
+      setVideoUrl('');
     } finally {
       setIsLoading(false);
     }
@@ -70,6 +86,7 @@ const PlayerPage = () => {
     const initPlayer = async () => {
       try {
         setIsLoading(true);
+        setVideoUrl(''); // 清空旧的视频URL
         console.log('正在初始化播放器, dramaId:', dramaId);
 
         // 获取 URL 参数中的集数（从历史记录跳转过来）
@@ -88,14 +105,14 @@ const PlayerPage = () => {
 
         if (data.episode?.parsedUrl) {
           console.log('获取到视频地址:', data.episode.parsedUrl);
-          setVideoUrl(data.episode.parsedUrl);
-
+          
           const totalEps = data.totalEpisodes || 20;
           const episodeList = Array.from({ length: totalEps }, (_, i) => ({
             index: i,
             label: `第${i + 1}集`,
           }));
 
+          // 先设置剧集信息
           setEpisodes(episodeList);
           setCurrentDrama({ id: dramaId, name: data.videoName });
           setCurrentEpisode(targetEpisodeIndex);
@@ -106,15 +123,6 @@ const PlayerPage = () => {
             totalEpisodes: totalEps,
           });
 
-          // 记录初始观看历史
-          addHistory({
-            dramaId: dramaId,
-            dramaName: data.videoName,
-            episode: targetEpisode,
-            episodeLabel: `第${targetEpisode}集`,
-            cover: data.cover || ''
-          });
-
           // 检查是否有历史记录，恢复播放进度
           const historyRecord = getHistoryByDrama(dramaId);
           if (historyRecord && historyRecord.episode === targetEpisode && historyRecord.currentTime > 0) {
@@ -123,6 +131,18 @@ const PlayerPage = () => {
           } else {
             setInitialTime(0);
           }
+
+          // 最后设置视频URL，触发播放器加载
+          setVideoUrl(data.episode.parsedUrl);
+
+          // 记录初始观看历史
+          addHistory({
+            dramaId: dramaId,
+            dramaName: data.videoName,
+            episode: targetEpisode,
+            episodeLabel: `第${targetEpisode}集`,
+            cover: data.cover || ''
+          });
         } else {
           console.error('API 响应中没有 parsedUrl:', data);
           alert('未能获取视频地址，请稍后重试');
@@ -130,7 +150,13 @@ const PlayerPage = () => {
       } catch (error) {
         console.error('初始化播放器失败:', error);
         console.error('错误详情:', error.response?.data || error.message);
-        alert(`加载播放器失败: ${error.response?.data?.message || error.message || '未知错误'}`);
+        
+        // 提供更友好的错误提示
+        const errorMsg = error.response?.status === 404 
+          ? '该剧集不存在或已下架' 
+          : error.response?.data?.message || error.message || '网络连接失败';
+        
+        alert(`加载播放器失败: ${errorMsg}\n请返回重新选择或稍后重试`);
       } finally {
         setIsLoading(false);
       }

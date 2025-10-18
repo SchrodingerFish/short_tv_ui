@@ -21,12 +21,14 @@ const VideoPlayer = ({
 
   const normalSpeed = 1.0;
   const fastSpeed = 3.0;
-  const MAX_RETRY = 3;
+  const MAX_RETRY = 2; // 减少最大重试次数到2次
 
   React.useEffect(() => {
     if (videoUrl && videoRef.current) {
       setVideoError(null);
       setRetryCount(0); // 重置重试计数
+      
+      console.log('设置视频URL:', videoUrl);
       videoRef.current.src = videoUrl;
       videoRef.current.load();
 
@@ -39,6 +41,7 @@ const VideoPlayer = ({
           })
           .catch(error => {
             console.log('自动播放失败，需要用户交互:', error);
+            // 自动播放失败不算错误，只是需要用户点击播放
           });
       }
     }
@@ -106,18 +109,50 @@ const VideoPlayer = ({
 
   const handleVideoError = (e) => {
     console.error('视频加载错误:', e);
+    const video = videoRef.current;
+    
+    if (!video) return;
+    
+    // 获取详细的错误信息
+    const error = video.error;
+    let errorMsg = '视频加载失败';
+    
+    if (error) {
+      switch(error.code) {
+        case 1:
+          errorMsg = '视频加载被中止';
+          break;
+        case 2:
+          errorMsg = '网络错误';
+          break;
+        case 3:
+          errorMsg = '视频解码失败';
+          break;
+        case 4:
+          errorMsg = '视频格式不支持或视频源不可用';
+          break;
+        default:
+          errorMsg = '未知错误';
+      }
+    }
+    
+    console.log('错误详情:', errorMsg, error);
 
-    // 如果还没达到最大重试次数，自动重试
-    if (retryCount < MAX_RETRY) {
+    // 只对网络错误和可恢复的错误进行重试
+    const shouldRetry = !error || error.code === 2; // 只重试网络错误
+    
+    // 如果还没达到最大重试次数且应该重试，自动重试
+    if (shouldRetry && retryCount < MAX_RETRY) {
       const nextRetry = retryCount + 1;
       setRetryCount(nextRetry);
-      console.log(`视频加载失败，${2}秒后自动重试 (${nextRetry}/${MAX_RETRY})...`);
+      console.log(`${errorMsg}，${2}秒后自动重试 (${nextRetry}/${MAX_RETRY})...`);
 
-      setVideoError(`加载失败，正在重试 (${nextRetry}/${MAX_RETRY})...`);
+      setVideoError(`${errorMsg}，正在重试 (${nextRetry}/${MAX_RETRY})...`);
 
       // 2秒后重试
       retryTimer.current = setTimeout(() => {
         if (videoRef.current && videoUrl) {
+          console.log('开始重试加载视频...');
           setVideoError(null);
           videoRef.current.load();
           videoRef.current.play().catch(err => {
@@ -126,8 +161,8 @@ const VideoPlayer = ({
         }
       }, 2000);
     } else {
-      // 达到最大重试次数，显示错误
-      setVideoError('视频加载失败，请点击重试或切换其他剧集');
+      // 达到最大重试次数或不应重试，显示错误
+      setVideoError(`${errorMsg}，请点击重试或切换其他剧集`);
       if (onError) onError(e);
     }
   };
