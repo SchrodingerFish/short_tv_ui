@@ -4,12 +4,12 @@ import './PosterCard.css';
 
 const PosterCard = ({ drama, onClick }) => {
   const { isFavorite, toggleFavorite } = useAppStore();
-  const favorited = isFavorite(drama.vod_id || drama.id);
+  const favorited = isFavorite(drama.id);
 
   const handleFavoriteClick = (e) => {
     e.stopPropagation(); // 阻止触发卡片点击
     toggleFavorite({
-      id: drama.vod_id || drama.id,
+      id: drama.id,
       name: drama.name,
       cover: drama.cover,
       score: drama.score,

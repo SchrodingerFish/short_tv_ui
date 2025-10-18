@@ -77,9 +77,9 @@ const HomePage = () => {
             <div className="poster-grid">
               {dramaList.map((drama) => (
                 <PosterCard
-                  key={drama.vod_id || drama.id}
+                  key={drama.id}
                   drama={drama}
-                  onClick={() => handleDramaClick(drama.vod_id || drama.id)}
+                  onClick={() => handleDramaClick(drama.id)}
                 />
               ))}
             </div>
