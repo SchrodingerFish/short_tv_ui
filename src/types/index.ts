@@ -9,7 +9,7 @@ export interface Drama {
   id: number;
   name: string;
   cover: string;
-  update_time: string;
+  update_time?: string;
   score: number;
 }
 

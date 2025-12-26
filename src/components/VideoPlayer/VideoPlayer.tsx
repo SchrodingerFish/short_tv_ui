@@ -55,8 +55,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         crossOrigin: 'anonymous',
         playsInline: true,
       },
-      // 禁用原生 notice，因为它会在播放/暂停时弹出提示
-      notice: [],
+
       customType: {
         m3u8: function (video: HTMLVideoElement, url: string) {
           if (Hls.isSupported()) {
