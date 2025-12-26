@@ -1,4 +1,4 @@
-# 福利短剧 - Vite + React 版本
+# 福利短剧 - Vite + React + TypeScript 版本
 
 这是一个基于 Vite + React 开发的现代化短剧播放平台。
 
@@ -11,10 +11,13 @@
 - 精美的卡片式海报墙设计
 
 ### 🛠️ 技术架构
+
 - **前端框架**: React 18
 - **构建工具**: Vite
+- **编程语言**: TypeScript
 - **状态管理**: Zustand
-- **路由管理**: React Router
+- **路由管理**: React Router 6
+- **视频播放**: ArtPlayer + HLS.js
 - **HTTP客户端**: Axios
 - **样式方案**: CSS Modules
 
@@ -22,33 +25,38 @@
 ```
 src/
 ├── components/          # 组件目录
-│   ├── Header/         # 头部组件(搜索、logo、随机推荐)
+│   ├── Header/         # 头部组件(搜索、logo、随机推荐、导航)
 │   ├── CategoryMenu/   # 分类菜单
 │   ├── PosterCard/     # 海报卡片
-│   ├── VideoPlayer/    # 视频播放器(支持长按倍速)
-│   └── EpisodeList/    # 剧集列表
+│   └── VideoPlayer/    # 视频播放器(基于 ArtPlayer)
 ├── pages/              # 页面目录
-│   ├── HomePage/       # 首页(海报墙、分页)
-│   └── PlayerPage/     # 播放页
+│   ├── HomePage/       # 首页(海报墙、分类切换)
+│   ├── PlayerPage/     # 播放页(视频播放、剧集列表)
+│   ├── HistoryPage/    # 历史记录
+│   ├── FavoritesPage/  # 我的收藏
+│   └── DownloadsPage/  # 下载管理
 ├── services/           # 服务层
-│   └── api.js         # API接口封装
+│   └── api.ts         # API接口封装
 ├── store/             # 状态管理
-│   └── useAppStore.js # Zustand store
+│   └── useAppStore.ts # Zustand store
 ├── styles/            # 全局样式
 │   └── global.css
-├── App.jsx            # 根组件
-└── main.jsx          # 入口文件
+├── types/             # 类型定义
+├── App.tsx            # 根组件
+└── main.tsx          # 入口文件
 ```
 
 ### ✨ 核心功能
+
 - ✅ 分类浏览 - 多个分类快速切换
 - ✅ 搜索功能 - 快速查找短剧
 - ✅ 随机推荐 - 一键获取随机短剧
-- ✅ 视频播放 - 支持自动播放下一集
-- ✅ 长按倍速 - 按住屏幕3倍速播放
+- ✅ 视频播放 - 支持自动播放下一集、长按倍速
 - ✅ 剧集切换 - 便捷的剧集选择
-- ✅ 分页加载 - 优化性能
-- ✅ PWA支持 - 可添加到主屏幕
+- ✅ 收藏功能 - 随时收藏心仪短剧
+- ✅ 播放历史 - 自动记录观看进度
+- ✅ 下载管理 - 方便管理已下载内容
+- ✅ PWA支持 - 可添加到主屏幕，离线体验优化
 
 ### 🚀 快速开始
 
@@ -67,7 +75,12 @@ npm run dev
 npm run build
 ```
 
-4. 预览生产版本
+4. 运行生产环境 (使用 serve)
+```bash
+npm start
+```
+
+5. 预览生产版本 (使用 vite preview)
 ```bash
 npm run preview
 ```
@@ -86,7 +99,6 @@ npm run preview
 - `/vod/recommend` - 随机推荐
 - `/vod/parse/single` - 解析视频地址
 
-### 🌟 与原版对比
 
 #### 架构优势
 - **组件化**: 采用React组件化开发,代码复用性高

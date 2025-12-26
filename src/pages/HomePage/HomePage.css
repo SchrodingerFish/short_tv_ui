@@ -12,7 +12,15 @@
 
 .poster-skeleton {
   aspect-ratio: 2/3;
-  border-radius: var(--radius);
+  border-radius: 12px;
+  background: var(--card);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.6; }
 }
 
 .pagination {
