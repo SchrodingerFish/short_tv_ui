@@ -1,0 +1,21 @@
+{
+  "name": "福利短剧",
+  "short_name": "短剧",
+  "description": "免费观看最新短剧",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00cc74",
+  "icons": [
+    {
+      "src": "https://cdn.lu8.fun/miniTv/fde6c35bf716c2e1c14f4b6172bf5d21.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://cdn.lu8.fun/miniTv/fde6c35bf716c2e1c14f4b6172bf5d21.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

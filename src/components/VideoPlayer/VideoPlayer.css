@@ -1,0 +1,90 @@
+.video-player-wrapper {
+  width: 100%;
+  position: relative;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  margin-bottom: 24px;
+}
+
+.artplayer-app {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 默认 16:9 */
+}
+
+.player-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .video-player-wrapper {
+    border-radius: 0;
+    margin-bottom: 16px;
+  }
+  
+  .artplayer-app {
+    aspect-ratio: 9 / 16; /* 适配竖屏短剧 */
+    height: calc(100vh - 120px); /* 移动端尽量充满屏幕高度，留出部分空间 */
+    max-height: 800px;
+  }
+}
+
+/* ArtPlayer Custom Overrides */
+.artplayer-app .art-video {
+  object-fit: contain !important; /* 确保不被截断 */
+}
+
+.art-notice {
+  display: none !important;
+}
+
+.custom-resume-tip {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(var(--primary-rgb), 0.95);
+  color: #000;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  animation: tipFadeIn 0.3s ease, tipFadeOut 0.3s ease 2.7s forwards;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+@keyframes tipFadeIn {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes tipFadeOut {
+  from { opacity: 1; transform: translate(-50%, 0); }
+  to { opacity: 0; transform: translate(-50%, -20px); }
+}

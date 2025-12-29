@@ -1,0 +1,352 @@
+.downloads-page {
+  padding: 24px 0;
+  min-height: calc(100vh - 200px);
+}
+
+.downloads-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.downloads-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.downloads-title svg {
+  color: var(--primary);
+}
+
+.downloads-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.downloads-count {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.clear-btn {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.clear-btn:hover {
+  background: #ff3b30;
+  border-color: #ff3b30;
+  color: white;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  margin-bottom: 24px;
+  color: var(--text-secondary);
+  opacity: 0.3;
+}
+
+.empty-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+
+.empty-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin: 0 0 32px;
+}
+
+.empty-btn {
+  padding: 12px 32px;
+  background: var(--primary);
+  border: none;
+  border-radius: 50px;
+  color: #000;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.empty-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.downloads-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.download-group {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.group-cover {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.group-info {
+  flex: 1;
+}
+
+.group-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+
+.group-count {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.group-episodes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.download-item {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.download-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.episode-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.download-status {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.download-progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.download-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.download-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.download-progress-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  min-width: 40px;
+  text-align: right;
+  font-weight: 500;
+}
+
+.download-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.download-file-btn,
+.remove-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.download-file-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #000;
+}
+
+.remove-btn:hover {
+  background: #ff3b30;
+  border-color: #ff3b30;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .downloads-page {
+    padding: 20px 0;
+  }
+
+  .downloads-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    gap: 12px;
+  }
+
+  .downloads-title {
+    font-size: 22px;
+    gap: 10px;
+  }
+
+  .downloads-count {
+    font-size: 14px;
+  }
+
+  .clear-btn {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
+  .empty-state {
+    padding: 60px 20px;
+  }
+
+  .empty-title {
+    font-size: 20px;
+  }
+
+  .empty-desc {
+    font-size: 14px;
+  }
+
+  .downloads-list {
+    gap: 20px;
+  }
+
+  .download-group {
+    padding: 16px;
+  }
+
+  .group-header {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .group-cover {
+    width: 50px;
+    height: 66px;
+  }
+
+  .group-name {
+    font-size: 16px;
+  }
+
+  .group-count {
+    font-size: 13px;
+  }
+
+  .download-item {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .episode-label {
+    font-size: 14px;
+  }
+
+  .download-status {
+    font-size: 12px;
+  }
+
+  .download-file-btn,
+  .remove-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .downloads-title {
+    font-size: 20px;
+  }
+
+  .download-group {
+    padding: 12px;
+  }
+
+  .group-cover {
+    width: 45px;
+    height: 60px;
+  }
+
+  .group-name {
+    font-size: 15px;
+  }
+
+  .empty-btn {
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+}

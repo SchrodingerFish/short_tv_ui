@@ -1,0 +1,343 @@
+.history-page {
+  padding: 24px 0;
+  min-height: calc(100vh - 200px);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.history-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.history-title svg {
+  color: var(--primary);
+}
+
+.history-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.history-count {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.clear-btn {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.clear-btn:hover {
+  background: #ff3b30;
+  border-color: #ff3b30;
+  color: white;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  margin-bottom: 24px;
+  color: var(--text-secondary);
+  opacity: 0.3;
+}
+
+.empty-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+
+.empty-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin: 0 0 32px;
+}
+
+.empty-btn {
+  padding: 12px 32px;
+  background: var(--primary);
+  border: none;
+  border-radius: 50px;
+  color: #000;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.empty-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.history-item {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.history-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.history-cover {
+  width: 80px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.history-cover:hover {
+  transform: scale(1.05);
+}
+
+.history-info {
+  flex: 1;
+  cursor: pointer;
+}
+
+.history-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+
+.history-episode {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+}
+
+.history-progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.history-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.history-progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.history-progress-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.history-time {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.continue-btn {
+  padding: 10px 20px;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.continue-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.remove-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.remove-btn:hover {
+  background: #ff3b30;
+  border-color: #ff3b30;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .history-page {
+    padding: 20px 0;
+  }
+
+  .history-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    gap: 12px;
+  }
+
+  .history-title {
+    font-size: 22px;
+    gap: 10px;
+  }
+
+  .history-count {
+    font-size: 14px;
+  }
+
+  .clear-btn {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
+  .empty-state {
+    padding: 60px 20px;
+  }
+
+  .empty-title {
+    font-size: 20px;
+  }
+
+  .empty-desc {
+    font-size: 14px;
+  }
+
+  .history-list {
+    gap: 12px;
+  }
+
+  .history-item {
+    flex-wrap: wrap;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .history-cover {
+    width: 60px;
+    height: 80px;
+  }
+
+  .history-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .history-name {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .history-episode {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .history-time {
+    font-size: 12px;
+  }
+
+  .history-progress-text {
+    font-size: 11px;
+  }
+
+  .continue-btn {
+    width: 100%;
+    order: 3;
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+
+  .remove-btn {
+    order: 2;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .history-title {
+    font-size: 20px;
+  }
+
+  .history-cover {
+    width: 55px;
+    height: 73px;
+  }
+
+  .history-name {
+    font-size: 15px;
+  }
+
+  .empty-btn {
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+}
